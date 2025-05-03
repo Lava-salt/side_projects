@@ -24,3 +24,4 @@ while True:
         mo -= 12
         yr += 1
     print(f"{yr}-{mo}-{da} {h}:{m}:{d.now().day}.{d.now().microsecond}")
+    print("{------------------------}")
