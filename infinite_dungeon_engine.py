@@ -38,6 +38,7 @@ class Dungeon:
         self.items = ["Wood Dagger", "Stone Sword", "Rusty Claymore", "Iron Broadsword", "Steel Greatsword", "Cloth Wear", "Chain Garment", "Stone Protector", "Iron Armour", "Steel Defence", "Wooden Bow", "Steel Bow", "Crossbow", "Wooden Arrow", "Steel Arrow", "Iron Arrow", "Apple", "Bread", "Meat", "Fish", "Cake", "Horn", "Fang", "Guts", "Bone", "Flesh", "Skin", "Cloth", "Wood", "Stone"]
         self.corpus = words.words()
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 2 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 lets you map all the places that have a specific room type.', "TrollCo branch #1 lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 lets you buy hints, like this one.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Swords are superior to bows and arrows, because they damage more and arrow supply could end in the middle of a fight.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
     def clear(self):
         system("cls")
     def displayInventory(self):
@@ -49,9 +50,44 @@ class Dungeon:
         self.gridVisit = self.grid.copy()
         for i in range(len(self.gridVisit)):
             self.gridVisit[i] = 0
+        self.mapGrid = self.gridVisit.copy()
+        for i in range(len(self.mapGrid)):
+            self.mapGrid[i] = "⬜"
         self.currentCoord = spawn
     def visitGrid(self):
         self.gridVisit[self.currentCoord] = 1
+        if self.mapGrid[self.currentCoord] == "⬜":
+            self.mapGrid[self.currentCoord] = "⬛"
+    def roomTypes(self):
+        print("T - Troll market - Place to buy and sell items")
+        print("C - Troll cartographer - Buy specific rooms' locations")
+        print("I - Troll information - Buy hints and tactics")
+        print("1 - Enemy - Dog")
+        print("2 - Enemy - Zombie")
+        print("3 - Enemy - Skeleton")
+        print("4 - Enemy - Knight")
+        print("5 - Enemy - Ogre")
+        print("6 - Enemy - Ghost")
+        print("7 - Enemy - Dragon")
+        print("8 - Enemy - Demon")
+        print("m - Treasure - Treasure with gold")
+        print("s - Treasure - Treasure with items")
+        print("o - Treasure - Already taken treasure")
+        print("N - Puzzle - Goblin's number puzzle")
+        print("W - Puzzle - Goblin's fake word puzzle")
+        print("w - Puzzle - Goblin's word guess puzzle")
+        print("f - Room - Room on fire")
+        print("i - Room - Icicles fall")
+        print("c - Room - Cannons shoot you")
+        print("b - Room - Trampolines (you bump)")
+        print("X - Room - Empty")
+        print("€ - E-Room - Open URL's")
+        print("F - File Room - Open files")
+        print("> - Code Room - Run code")
+        print("? - Warp Room - Warps you to a random place")
+        print("! - Warp Room - Warps you to a select place with gold")
+        print("- - Key Room - Key needed to exit dungeon location")
+        print("+ - Exit Room - Dungeon exit location")
     def trollMarket(self):
         print("Welcome to the troll market!")
         print("Please buy my items, I live like this underground...")
@@ -254,7 +290,9 @@ class Dungeon:
                 elif x == 3:
                     print("How did you know my secret?")
                     print("Don't tell anyone that I evade that goblin's tax.")
-                    print("Also, this market's also a casino.")
+                    print("Please don't tell, I beg you.")
+                    print("Would you not tell if I let you use this market's secret?")
+                    print("This market has a ... casino.")
                     print("You can gamble money: give me money,")
                     print("I will flip a rock. If it is a head, you win double money.")
                     print("If it is a tail, you lose your money. Wanna try?")
@@ -288,6 +326,77 @@ class Dungeon:
                 else:
                     print("I don't understand you.")
                     print("So I assume that you'll stay.")
+    def trollCartographer(self):
+        print("I'm the troll from the market!")
+        print("I've founded TrollCo, which is an underground company for everything.")
+        print("For example, this is its cartography branch.")
+        print("You can do these here:")
+        print("1 - [Get a specific room type's all coordinates] (40g)")
+        print("2 - [Get a select coordinate's contents] (10g)")
+        x = int(input("You: "))
+        if x == 1:
+            print("Okay, select the room type please:")
+            self.roomTypes()
+            x = input("You: ")
+            self.spend = 40
+            self.money -= self.spend
+            if self.money < 0:
+                print("What? You have money less than my price!")
+                print("Go map out that yourself!")
+            else:
+                print("I marked all the places that has that room type, specifically; the")
+                for i in range(len(self.grid)):
+                    if self.grid[i] == x:
+                        print(i)
+                        self.mapGrid[i] = self.grid[i]
+                print("coordinates. (0 = Top Left, 9 = Top Right, 90 = Bottom Left, 99 = Bottom Right)")
+        elif x == 2:
+            print("Okay, select the room coordinate please:")
+            print("(0 = Top Left, 9 = Top Right, 90 = Bottom Left, 99 = Bottom Right)")
+            x = input("You: ")
+            self.spend = 10
+            self.money -= self.spend
+            if self.money < 0:
+                print("What? You have money less than my price!")
+                print("Go map out that yourself!")
+            else:
+                self.visitGrid[x] = self.grid[x]
+                print(f"I mapped that place, which is shown as \"{self.grid[x]}\" in our system.")
+                print("The system looks like:")
+                self.roomTypes()
+        else:
+            print("What are you saying? This is not the ordinary troll market!")
+            print("This is a serious branch of a serious company!")
+            print("Also, good luck on your adventure.")
+    def trollInfo(self):
+        print("I'm the troll from the market!")
+        print("I've founded TrollCo, which is an underground company for everything.")
+        print("For example, this is its cartography branch.")
+        print("Where you can buy hints for 3 gold.")
+        print("1 - [Buy one]")
+        print("2 - [Don't buy]")
+        x = int(input("You: "))
+        if x == 1:
+            self.spend = 3
+            self.money -= self.spend
+            if len(self.hints) == 0:
+                if self.money < 0:
+                    print("Well, you got all my hints.")
+                    print("You must be wise now - and very rich.")
+                    print("But you're now bankrupt, ahhh...")
+                else:
+                    print("Well, you got all my hints.")
+                    print("You must be wise now - and very rich.")
+                    print("But you have still lots of money, how?!")
+                self.money += self.spend
+            elif self.money < 0:
+                print("What? You have money less than my price!")
+                print("Go figure out hints yourself!")
+            else:
+                print("Here you go, the hint is:")
+                self.hintInt = randint(0, len(self.hints) - 1)
+                print(self.hints[self.hintInt])
+                del self.hints[self.hintInt]
     def renderEnemy(self, hp, damage1, damage2, defence, name, coords):
         if self.gridVisit[coords] == 1:
             print(f"This room once had a {name}.")
@@ -355,7 +464,7 @@ class Dungeon:
                         print(f"You killed the {name}!")
                         self.stuff = choice(self.junk)
                         print(f"You got some {self.stuff.lower()}.")
-                        for i in range(randint(1, 10)):
+                        for i in range(randint(1, 3)):
                             self.inventory.append(self.stuff)
                         break
                 elif x == 2:
@@ -431,7 +540,7 @@ class Dungeon:
             print("But you got it.")
         else:
             print("This room contains a treasure!")
-            self.treasure = randint(1, 200)
+            self.treasure = randint(1, 20)
             print(f"You found {self.treasure} gold!")
     def stuffTreasure(self, coords):
         if self.gridVisit[coords] == 1:
@@ -441,14 +550,14 @@ class Dungeon:
             print("This room contains a treasure!")
             self.treasure = choice(self.items)
             print(f"You found some {self.treasure.lower()}!")
-            for i in range(randint(1, 10)):
+            for i in range(randint(1, 5)):
                 self.inventory.append(self.treasure)
     def oldTreasure(self):
         print("This room contains a treasure!")
         print("But another knight took it...")
     def emptyRoom(self):
         print("This room is empty.")
-    def randomPuzzle(self):
+    def numberPuzzle(self):
         print("Hello, I'm a goblin.")
         print("If you want to pass, guess my number.")
         self.number = randint(1, 100)
@@ -584,6 +693,22 @@ class Dungeon:
             exec(x)
         except Exception:
             system(x)
+    def warpRandom(self):
+        print("This room warps you to a random place!")
+        input()
+        self.currentCoord = randint(0, 99)
+    def warpRoom(self):
+        print("This room warps you to a select place for 30 gold!")
+        print("1 - [Warp]")
+        print("2 - [Pass]")
+        if x == 1:
+            self.spend = 30
+            self.money -= self.spend
+            if self.money < 0:
+                print("You don't have sufficient money.")
+            else:
+                print("Where to warp?")
+                self.currentCoord = int(input("You: "))
     def keyRoom(self):
         print("This room has a key.")
         print("Keys can open dungeon exits.")
@@ -612,6 +737,10 @@ class Dungeon:
             self.locationType = self.grid[self.currentCoord]
             if self.locationType == "T":
                 self.trollMarket()
+            elif self.locationType == "C":
+                self.trollCartographer()
+            elif self.locationType == "I":
+                self.trollInfo()
             elif self.locationType == "1":
                 self.renderEnemy(3, 1, 2, 0, "Dog", self.currentCoord)
             elif self.locationType == "2":
@@ -656,6 +785,10 @@ class Dungeon:
                 self.fileRoom()
             elif self.locationType == ">":
                 self.codeRoom()
+            elif self.locationType == "?":
+                self.warpRandom()
+            elif self.locationType == "!":
+                self.warpRoom()
             elif self.locationType == "-":
                 self.keyRoom()
             elif self.locationType == "+":
@@ -666,11 +799,15 @@ class Dungeon:
                 print(self.grid)
                 quit()
             self.visitGrid()
-            print(f"Location: Room #{self.currentCoord} of 10x10 grid dungeon")
+            for i in range(10):
+                for j in range(10):
+                    print(end = self.mapGrid[i * 10 + j])
+                print()
             print("1 - [Proceed left]")
             print("2 - [Proceed right]")
             print("3 - [Proceed up]")
             print("4 - [Proceed down]")
+            print("5 - [Stay]")
             x = int(input("You: "))
             if x == 1:
                 if self.currentCoord - 1 < 0:
@@ -718,7 +855,7 @@ while True:
         knight.clear()
         knight.grid = []
         for i in range(100):
-            knight.grid.append(choice(["T", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">"]))
+            knight.grid.append(choice(["T", "C", "I", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">"]))
         knight.grid[randint(1, 99)] = "+"
         knight.grid[randint(1, 99)] = "-"
         knight.grid[0] = "T"
@@ -750,52 +887,38 @@ while True:
             print()
         print("This is a sample dungeon in a 10x10 grid.")
         print("You can add rooms as letters:")
-        print("T - Troll market - Place to buy and sell items")
-        print("1 - Enemy - Dog")
-        print("2 - Enemy - Zombie")
-        print("3 - Enemy - Skeleton")
-        print("4 - Enemy - Knight")
-        print("5 - Enemy - Ogre")
-        print("6 - Enemy - Ghost")
-        print("7 - Enemy - Dragon")
-        print("8 - Enemy - Demon")
-        print("m - Treasure - Treasure with gold")
-        print("s - Treasure - Treasure with items")
-        print("o - Treasure - Already taken treasure")
-        print("N - Puzzle - Goblin's number puzzle")
-        print("W - Puzzle - Goblin's fake word puzzle")
-        print("w - Puzzle - Goblin's word guess puzzle")
-        print("f - Room - Room on fire")
-        print("i - Room - Icicles fall")
-        print("c - Room - Cannons shoot you")
-        print("b - Room - Trampolines (you bump)")
-        print("X - Room - Empty")
-        print("€ - E-Room - Open URL's")
-        print("F - File Room - Open files")
-        print("> - Code Room - Run code")
-        print("- - Key Room - Key needed to exit dungeon location")
-        print("+ - Exit Room - Dungeon exit location")
+        knight.roomTypes()
         print("Make a dungeon by putting letters in a 10x10 grid,")
         print("And then make the whole grid a single line.")
         print("For example, a 4x4 grid:")
         print("TXXX\nXXXX\nXXXX\nX+XX")
         print("It'll be TXXXXXXXXXXXX+XX.")
         print("Then, enter it as a dungeon save code.")
-        print("Or try my trial dungeon!")
-        print("1 - [Try My Dungeon!]")
-        print("2 - [Enter Save Code]")
+        print("Maybe, try a random dungeon...")
+        print("1 - [Enter Save Code]")
+        print("2 - [Try Random Dungeon]")
         print("3 - [Quit]")
         x = int(input("You: "))
         if x == 1:
             knight.clear()
-            knight.grid = list("T>1mWNf€Xbw2mmsWXiFfii213>bcc>323Ffsossm€F45mmm4€c4if€msoXXNNNXwW56>X-XXXcbbb>€XX+XT6FNXsmXXxf78wXms")
-            print("Thanks for trying my dungeon!")
-            print("As a reward, you start with 200 gold!")
-            knight.money = 200
+            knight.grid = list(input("Dungeon save code: ").strip())
             knight.startDungeon(knight.grid)
         elif x == 2:
             knight.clear()
-            knight.grid = list(input("Dungeon save code: ").strip())
+            knight.grid = []
+            for i in range(100):
+                knight.grid.append(choice(["T", "C", "I", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">"]))
+            knight.grid[randint(1, 99)] = "+"
+            knight.grid[randint(1, 99)] = "-"
+            knight.grid[0] = "T"
+            while not "+" in knight.grid or not "-" in knight.grid or not knight.grid[0] == "T":
+                knight.grid[randint(1, 99)] = "+"
+                knight.grid[randint(1, 99)] = "-"
+                knight.grid[0] = "T"
+            print("Since this dungeon is randomly generated,")
+            print("Anything can happen, e.g. getting a demon (hardest monster) in the first room.")
+            print("Just in case, get 100 gold.")
+            knight.money = 100
             knight.startDungeon(knight.grid)
         elif x == 3:
             quit()
