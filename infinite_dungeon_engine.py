@@ -25,7 +25,7 @@ input("\nEnter to continue... ")
 system("cls")
 class Dungeon:
     def __init__(self):
-        self.money = 50
+        self.money = 15
         self.inventory = []
         self.hp = 10
         self.beat = False
@@ -727,8 +727,8 @@ while True:
             knight.grid[randint(1, 99)] = "-"
         print("Since this dungeon is randomly generated,")
         print("Anything can happen, e.g. getting a demon (hardest monster) in the first room.")
-        print("Just in case, get 1000 gold.")
-        knight.money = 1000
+        print("Just in case, get 100 gold.")
+        knight.money = 100
         knight.startDungeon(knight.grid)
     elif x == 2:
         knight.clear()
