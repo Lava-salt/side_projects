@@ -15,7 +15,7 @@ print("He packed his bag with some food and set off on his journey.")
 print("While he was walking in the streets, he found a magic board.")
 print("This board could open a portal to a Python project.")
 print("The knight was curious and decided to touch on the board.")
-print("Suddenly, he was transported to a Python code, where;")
+print("Suddenly; he was transported to a Python code, where;")
 print("There's a code to generate infinite dungeons.")
 print("The knight decided to explore some dungeons while he stayed there.")
 input("Enter to continue... ")
@@ -38,7 +38,7 @@ class Dungeon:
         self.items = ["Wood Dagger", "Stone Sword", "Rusty Claymore", "Iron Broadsword", "Steel Greatsword", "Cloth Wear", "Chain Garment", "Stone Protector", "Iron Armour", "Steel Defence", "Wooden Bow", "Steel Bow", "Crossbow", "Wooden Arrow", "Steel Arrow", "Iron Arrow", "Apple", "Bread", "Meat", "Fish", "Cake", "Horn", "Fang", "Guts", "Bone", "Flesh", "Skin", "Cloth", "Wood", "Stone"]
         self.corpus = words.words()
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 2 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 lets you map all the places that have a specific room type.', "TrollCo branch #1 lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 lets you buy hints, like this one.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Swords are superior to bows and arrows, because they damage more and arrow supply could end in the middle of a fight.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
+        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 2 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 lets you map all the places that have a specific room type.', "TrollCo branch #1 lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 lets you buy hints, like this one.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
     def clear(self):
         system("cls")
     def displayInventory(self):
@@ -371,7 +371,7 @@ class Dungeon:
     def trollInfo(self):
         print("I'm the troll from the market!")
         print("I've founded TrollCo, which is an underground company for everything.")
-        print("For example, this is its cartography branch.")
+        print("For example, this is its information branch.")
         print("Where you can buy hints for 3 gold.")
         print("1 - [Buy one]")
         print("2 - [Don't buy]")
@@ -397,6 +397,12 @@ class Dungeon:
                 self.hintInt = randint(0, len(self.hints) - 1)
                 print(self.hints[self.hintInt])
                 del self.hints[self.hintInt]
+        elif x == 2:
+            print("Goodbye.")
+        else:
+            print("What are you saying? This is not the ordinary troll market!")
+            print("This is a serious branch of a serious company!")
+            print("Also, good luck on your adventure.")
     def renderEnemy(self, hp, damage1, damage2, defence, name, coords):
         if self.gridVisit[coords] == 1:
             print(f"This room once had a {name}.")
@@ -429,10 +435,13 @@ class Dungeon:
                                 continue
                             else:
                                 break
-                        print(f"You damage the enemy {self.swords.index(self.inventory[self.selectWeapon]) + 1 * 4} HP with your {self.inventory[self.selectWeapon]}")
-                        hp -= self.swords.index(self.inventory[self.selectWeapon]) + 1 * 4
-                        hp += defence
-                        print(f"The {name} healed {defence} HP.")
+                        if randint(1, 2) == 1:
+                            print(f"You damage the enemy {self.swords.index(self.inventory[self.selectWeapon]) + 1 * 4} HP with your {self.inventory[self.selectWeapon]}")
+                            hp -= self.swords.index(self.inventory[self.selectWeapon]) + 1 * 4
+                            hp += defence
+                            print(f"The {name} healed {defence} HP.")
+                        else:
+                            print(f"The {name} ran away, and your sword couldn't reach it.")
                     elif x == 2:
                         self.displayInventory()
                         true = False
@@ -651,7 +660,7 @@ class Dungeon:
                 print("You died.")
                 quit()
         else:
-            print("You survived the fire.")
+            print("You survived the icicles.")
     def cannonRoom(self):
         print("This room has cannons.")
         if randint(1, 2) == 1:
@@ -663,7 +672,7 @@ class Dungeon:
                 print("You died.")
                 quit()
         else:
-            print("You survived the fire.")
+            print("You survived the cannons.")
     def bumpRoom(self):
         print("This room consist trampolines.")
         while True:
@@ -801,8 +810,11 @@ class Dungeon:
             self.visitGrid()
             for i in range(10):
                 for j in range(10):
-                    print(end = self.mapGrid[i * 10 + j])
-                print()
+                    if self.currentCoord = self.mapGrid[i * 10 + j]:
+                        print(end = "❌")
+                    else:
+                        print(end = self.mapGrid[i * 10 + j])
+                    print()
             print("1 - [Proceed left]")
             print("2 - [Proceed right]")
             print("3 - [Proceed up]")
