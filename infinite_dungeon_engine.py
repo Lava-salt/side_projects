@@ -810,7 +810,7 @@ class Dungeon:
             self.visitGrid()
             for i in range(10):
                 for j in range(10):
-                    if self.currentCoord = self.mapGrid[i * 10 + j]:
+                    if self.currentCoord == self.mapGrid[i * 10 + j]:
                         print(end = "❌")
                     else:
                         print(end = self.mapGrid[i * 10 + j])
