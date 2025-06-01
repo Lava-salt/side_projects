@@ -564,8 +564,6 @@ class Dungeon:
     def oldTreasure(self):
         print("This room contains a treasure!")
         print("But another knight took it...")
-    def emptyRoom(self):
-        print("This room is empty.")
     def numberPuzzle(self):
         print("Hello, I'm a goblin.")
         print("If you want to pass, guess my number.")
