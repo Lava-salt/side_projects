@@ -38,7 +38,7 @@ class Dungeon:
         self.items = ["Wood Dagger", "Stone Sword", "Rusty Claymore", "Iron Broadsword", "Steel Greatsword", "Cloth Wear", "Chain Garment", "Stone Protector", "Iron Armour", "Steel Defence", "Wooden Bow", "Steel Bow", "Crossbow", "Wooden Arrow", "Steel Arrow", "Iron Arrow", "Apple", "Bread", "Meat", "Fish", "Cake", "Horn", "Fang", "Guts", "Bone", "Flesh", "Skin", "Cloth", "Wood", "Stone"]
         self.corpus = words.words()
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 2 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 lets you map all the places that have a specific room type.', "TrollCo branch #1 lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 lets you buy hints, like this one.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
+        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 3 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 (cartography branch) lets you map all the places that have a specific room type.', "TrollCo branch #1 (cartography branch) lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 (information branch) lets you buy hints, like this one.', 'TrollCo branch #3 is a crafting branch.', 'TrollCo branch #3 (information branch) lets you craft useful items from useless junk.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'Defeating a monster gives you random useless items, but you can craft items from them in TrollCo Branch #3.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
     def clear(self):
         system("cls")
     def displayInventory(self):
@@ -59,9 +59,10 @@ class Dungeon:
         if self.mapGrid[self.currentCoord] == "⬜":
             self.mapGrid[self.currentCoord] = "⬛"
     def roomTypes(self):
-        print("T - Troll market - Place to buy and sell items")
-        print("C - Troll cartographer - Buy specific rooms' locations")
-        print("I - Troll information - Buy hints and tactics")
+        print("T - Troll Market - Place to buy and sell items")
+        print("C - Troll Cartographer - Buy specific rooms' locations")
+        print("I - Troll İnformation - Buy hints and tactics")
+        print("M - Troll Maker - Craft items from your junk")
         print("1 - Enemy - Dog")
         print("2 - Enemy - Zombie")
         print("3 - Enemy - Skeleton")
@@ -403,6 +404,206 @@ class Dungeon:
             print("What are you saying? This is not the ordinary troll market!")
             print("This is a serious branch of a serious company!")
             print("Also, good luck on your adventure.")
+    def trollMaker(self):
+        print("I'm the troll from the market!")
+        print("I've founded TrollCo, which is an underground company for everything.")
+        print("For example, this is its crafting branch.")
+        print("Where you can craft items for free.")
+        print("Will you craft something?")
+        while True:
+            print("1 - [Craft]")
+            print("2 - [Go]")
+            x = int(input("You: "))
+            if x == 1:
+                print("There's a variety to craft.")
+                print("1 - [Wood Dagger] - Wood, Bone")
+                print("2 - [Stone Sword] - Stone, Fang")
+                print("3 - [Rusty Claymore] - Stone, Horn")
+                print("4 - [Iron Broadsword] - Stone, Guts, Fang")
+                print("5 - [Steel Greatsword] - Stone, Cloth, Guts, Bone")
+                print("6 - [Cloth Wear] - Cloth")
+                print("7 - [Chain Garment] - Stone, Flesh")
+                print("8 - [Stone Protector] - Stone, Bone")
+                print("9 - [Iron Armour] - Stone, Guts, Skin, Wood")
+                print("10 - [Steel Defence] - Stone, Fang, Flesh, Skin, Cloth")
+                print("11 - [Wooden Bow] - Wood, Cloth")
+                print("12 - [Steel Bow] - Stone, Cloth")
+                print("13 - [Crossbow] - Stone, Wood, Skin, Cloth")
+                print("14 - [Wooden Arrow] - Wood, Horn")
+                print("15 - [Steel Arrow] - Stone, Horn, Fang")
+                print("16 - [Iron Arrow] - Stone, Bone")
+                print("17 - [Meat] - Flesh, Stone")
+                print("18 - [Fish] - Flesh, Cloth")
+                print("19 - [Cake] - Guts, Flesh, Skin")
+                x = int(input("You: "))
+                if x == 1:
+                    if "Wood" in self.inventory and "Bone" in self.inventory:
+                        del self.inventory[self.inventory.index("Wood")]
+                        del self.inventory[self.inventory.index("Bone")]
+                        self.inventory.append("Wood Dagger")
+                        print("I've made a Wood Dagger for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 2:
+                    if "Stone" in self.inventory and "Fang" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Fang")]
+                        self.inventory.append("Stone Sword")
+                        print("I've made a Stone Sword for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 3:
+                    if "Stone" in self.inventory and "Horn" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Horn")]
+                        self.inventory.append("Rusty Claymore")
+                        print("I've made a Rusty Claymore for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 4:
+                    if "Stone" in self.inventory and "Guts" in self.inventory and "Fang" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Guts")]
+                        del self.inventory[self.inventory.index("Fang")]
+                        self.inventory.append("Iron Broadsword")
+                        print("I've made an Iron Broadsword for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 5:
+                    if "Stone" in self.inventory and "Cloth" in self.inventory and "Guts" in self.inventory and "Bone" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        del self.inventory[self.inventory.index("Guts")]
+                        del self.inventory[self.inventory.index("Bone")]
+                        self.inventory.append("Steel Greatsword")
+                        print("I've made a Steel Greatsword for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 6:
+                    if "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Cloth Wear")
+                        print("I've made a Cloth Wear for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 7:
+                    if "Stone" in self.inventory and "Flesh" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Flesh")]
+                        self.inventory.append("Chain Garment")
+                        print("I've made a Chain Garment for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 8:
+                    if "Stone" in self.inventory and "Bone" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Bone")]
+                        self.inventory.append("Stone Protector")
+                        print("I've made a Stone Protector for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 9:
+                    if "Stone" in self.inventory and "Guts" in self.inventory and "Skin" in self.inventory and "Wood" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Guts")]
+                        del self.inventory[self.inventory.index("Skin")]
+                        del self.inventory[self.inventory.index("Wood")]
+                        self.inventory.append("Iron Armour")
+                        print("I've made Iron Armour for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 10:
+                    if "Stone" in self.inventory and "Fang" in self.inventory and "Flesh" in self.inventory and "Skin" in self.inventory and "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Fang")]
+                        del self.inventory[self.inventory.index("Flesh")]
+                        del self.inventory[self.inventory.index("Skin")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Steel Defence")
+                        print("I've made Steel Defence for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 11:
+                    if "Wood" in self.inventory and "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Wood")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Wooden Bow")
+                        print("I've made a Wooden Bow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 12:
+                    if "Stone" in self.inventory and "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Steel Bow")
+                        print("I've made a Steel Bow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 13:
+                    if "Stone" in self.inventory and "Wood" in self.inventory and "Skin" in self.inventory and "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Wood")]
+                        del self.inventory[self.inventory.index("Skin")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Crossbow")
+                        print("I've made a Crossbow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 14:
+                    if "Wood" in self.inventory and "Horn" in self.inventory:
+                        del self.inventory[self.inventory.index("Wood")]
+                        del self.inventory[self.inventory.index("Horn")]
+                        self.inventory.append("Wooden Arrow")
+                        print("I've made a Wooden Arrow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 15:
+                    if "Stone" in self.inventory and "Horn" in self.inventory and "Fang" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Horn")]
+                        del self.inventory[self.inventory.index("Fang")]
+                        self.inventory.append("Steel Arrow")
+                        print("I've made a Steel Arrow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 16:
+                    if "Stone" in self.inventory and "Bone" in self.inventory:
+                        del self.inventory[self.inventory.index("Stone")]
+                        del self.inventory[self.inventory.index("Bone")]
+                        self.inventory.append("Iron Arrow")
+                        print("I've made an Iron Arrow for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 17:
+                    if "Flesh" in self.inventory and "Stone" in self.inventory:
+                        del self.inventory[self.inventory.index("Flesh")]
+                        del self.inventory[self.inventory.index("Stone")]
+                        self.inventory.append("Meat")
+                        print("I've made some Meat for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 18:
+                    if "Flesh" in self.inventory and "Cloth" in self.inventory:
+                        del self.inventory[self.inventory.index("Flesh")]
+                        del self.inventory[self.inventory.index("Cloth")]
+                        self.inventory.append("Fish")
+                        print("I've made some Fish for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                elif x == 19:
+                    if "Guts" in self.inventory and "Flesh" in self.inventory and "Skin" in self.inventory:
+                        del self.inventory[self.inventory.index("Guts")]
+                        del self.inventory[self.inventory.index("Flesh")]
+                        del self.inventory[self.inventory.index("Skin")]
+                        self.inventory.append("Cake")
+                        print("I've made a Cake for you!")
+                    else:
+                        print("You don't have the items for me to craft!")
+                else:
+                    print("What item are you talking about?")
+            elif x == 2:
+                break
+            print("Cool, now will you craft again?")
     def renderEnemy(self, hp, damage1, damage2, defence, name, coords):
         if self.gridVisit[coords] == 1:
             print(f"This room once had a {name}.")
@@ -748,6 +949,8 @@ class Dungeon:
                 self.trollCartographer()
             elif self.locationType == "I":
                 self.trollInfo()
+            elif self.locationType == "M":
+                self.trollMaker()
             elif self.locationType == "1":
                 self.renderEnemy(3, 1, 2, 0, "Dog", self.currentCoord)
             elif self.locationType == "2":
@@ -812,7 +1015,7 @@ class Dungeon:
                         print(end = "❌")
                     else:
                         print(end = self.mapGrid[i * 10 + j])
-                    print()
+                print()
             print("1 - [Proceed left]")
             print("2 - [Proceed right]")
             print("3 - [Proceed up]")
@@ -865,7 +1068,7 @@ while True:
         knight.clear()
         knight.grid = []
         for i in range(100):
-            knight.grid.append(choice(["T", "C", "I", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">"]))
+            knight.grid.append(choice(["T", "C", "I", "M", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
         knight.grid[randint(1, 99)] = "+"
         knight.grid[randint(1, 99)] = "-"
         knight.grid[0] = "T"
@@ -917,7 +1120,7 @@ while True:
             knight.clear()
             knight.grid = []
             for i in range(100):
-                knight.grid.append(choice(["T", "C", "I", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">"]))
+                knight.grid.append(choice(["T", "C", "I", "M", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
             knight.grid[randint(1, 99)] = "+"
             knight.grid[randint(1, 99)] = "-"
             knight.grid[0] = "T"
@@ -935,3 +1138,4 @@ while True:
     elif x == 4:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
+        quit()
