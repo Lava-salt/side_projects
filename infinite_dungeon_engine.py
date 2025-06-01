@@ -208,6 +208,7 @@ class Dungeon:
                     print("Okay, now will you go?")
                 else:
                     print("Cool choice, will you go now?")
+                print(f"Know that you have {self.money} gold left.")
                 print("1 - [Go]")
                 print("2 - [Stay]")
                 x = int(input("You: "))
