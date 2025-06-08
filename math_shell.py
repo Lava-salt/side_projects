@@ -1,4 +1,22 @@
 # Here's a code terminal -- to display math equations!
+from math import *
+from statistics import *
+from random import *
+try:
+    from numpy import *
+    from scipy import *
+    from matplotlib import *
+except ModuleNotFoundError:
+    from os import system
+    system("pip install numpy")
+    system("cls")
+    system("pip install scipy")
+    system("cls")
+    system("pip install matplotlib")
+    system("cls")
+    from numpy import *
+    from scipy import *
+    from matplotlib import *
 print("Functional Mathematics Shell")
 print("Type \"help\" for help.")
 while True:
