@@ -31,7 +31,7 @@ def {cmd.split('=')[0].strip()}:
             print(f"Defined function \"{cmd.split('=')[0].strip()}\" as \"{"=".join(cmd.split('=')[1:]).strip()}\"")
         except Exception:
             exec(f"{cmd.split('=')[0].strip()} = {"=".join(cmd.split('=')[1:]).strip()}")
-            print(f"Defined {cmd.split('=')[0].strip()} as \"{eval("=".join(cmd.split('=')[1:]).strip())}\"")
+            print(f"Defined variable {cmd.split('=')[0].strip()} as \"{eval("=".join(cmd.split('=')[1:]).strip())}\"")
     else:
         try:
             print(eval(cmd))
