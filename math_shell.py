@@ -1,4 +1,6 @@
 # Here's a code terminal -- to display math equations!
+from os import system
+system("cls")
 from math import *
 from statistics import *
 from random import *
@@ -7,7 +9,6 @@ try:
     from scipy import *
     from matplotlib import *
 except ModuleNotFoundError:
-    from os import system
     system("pip install numpy")
     system("cls")
     system("pip install scipy")
@@ -17,6 +18,7 @@ except ModuleNotFoundError:
     from numpy import *
     from scipy import *
     from matplotlib import *
+system("cls")
 print("Functional Mathematics Shell")
 print("Type \"help\" for help.")
 while True:
@@ -48,8 +50,14 @@ def {cmd.split('=')[0].strip()}:
 """)
             print(f"Defined function \"{cmd.split('=')[0].strip()}\" as \"{"=".join(cmd.split('=')[1:]).strip()}\"")
         except Exception:
-            exec(f"{cmd.split('=')[0].strip()} = {"=".join(cmd.split('=')[1:]).strip()}")
-            print(f"Defined variable {cmd.split('=')[0].strip()} as \"{eval("=".join(cmd.split('=')[1:]).strip())}\"")
+            try:
+                exec(f"{cmd.split('=')[0].strip()} = {"=".join(cmd.split('=')[1:]).strip()}")
+                print(f"Defined variable {cmd.split('=')[0].strip()} as \"{eval("=".join(cmd.split('=')[1:]).strip())}\"")
+            except Exception:
+                try:
+                    print(eval(cmd))
+                except Exception as e:
+                    print(e)
     else:
         try:
             print(eval(cmd))
