@@ -2,6 +2,7 @@ from os import system
 from random import randint, choice
 from webbrowser import open
 from subprocess import call
+from datetime import datetime
 try:
     import nltk
 except ModuleNotFoundError:
@@ -24,10 +25,15 @@ print("I.D.E.: Infinite Dungeon Engine")
 input("\nEnter to continue... ")
 system("cls")
 class Dungeon:
+    def secsToday(self):
+        return datetime.now().hour * 60 * 60 + datetime.now().minute * 60 + datetime.now().second
     def __init__(self):
         self.money = 15
         self.inventory = []
         self.hp = 10
+        self.bankStorage = 0
+        self.bankTimeOld = self.secsToday()
+        self.bankTimeNew = self.secsToday()
         self.beat = False
         self.swords = ["Wood Dagger", "Stone Sword", "Rusty Claymore", "Iron Broadsword", "Steel Greatsword"]
         self.armour = ["Cloth Wear", "Chain Garment", "Stone Protector", "Iron Armour", "Steel Defence"]
@@ -38,7 +44,7 @@ class Dungeon:
         self.items = ["Wood Dagger", "Stone Sword", "Rusty Claymore", "Iron Broadsword", "Steel Greatsword", "Cloth Wear", "Chain Garment", "Stone Protector", "Iron Armour", "Steel Defence", "Wooden Bow", "Steel Bow", "Crossbow", "Wooden Arrow", "Steel Arrow", "Iron Arrow", "Apple", "Bread", "Meat", "Fish", "Cake", "Horn", "Fang", "Guts", "Bone", "Flesh", "Skin", "Cloth", "Wood", "Stone"]
         self.corpus = words.words()
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 3 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 (cartography branch) lets you map all the places that have a specific room type.', "TrollCo branch #1 (cartography branch) lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 (information branch) lets you buy hints, like this one.', 'TrollCo branch #3 is a crafting branch.', 'TrollCo branch #3 (information branch) lets you craft useful items from useless junk.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'Defeating a monster gives you random useless items, but you can craft items from them in TrollCo Branch #3.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
+        self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 3 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 (cartography branch) lets you map all the places that have a specific room type.', "TrollCo branch #1 (cartography branch) lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 (information branch) lets you buy hints, like this one.', 'TrollCo branch #3 is a crafting branch.', 'TrollCo branch #3 (information branch) lets you craft useful items from useless junk.', 'TrollCo branch #4 is an economic branch.', 'TrollCo branch #4 (economic branch) lets you withdraw and deposit gold.', 'Some rooms are walls, so you can\'t pass through them.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'Defeating a monster gives you random useless items, but you can craft items from them in TrollCo Branch #3.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
     def clear(self):
         system("cls")
     def displayInventory(self):
@@ -63,6 +69,8 @@ class Dungeon:
         print("C - Troll Cartographer - Buy specific rooms' locations")
         print("I - Troll İnformation - Buy hints and tactics")
         print("M - Troll Maker - Craft items from your junk")
+        print("B - Troll Bank - Deposit gold to it, and get it later")
+        print("0 - Wall - A full room that's covered by wall, so you can't pass through")
         print("1 - Enemy - Dog")
         print("2 - Enemy - Zombie")
         print("3 - Enemy - Skeleton")
@@ -605,6 +613,61 @@ class Dungeon:
             elif x == 2:
                 break
             print("Cool, now will you craft again?")
+    def trollBank(self):
+        print("I'm the troll from the market!")
+        print("I've founded TrollCo, which is an underground company for everything.")
+        print("For example, this is its economic branch.")
+        print("You can deposit and withdraw gold here.")
+        print("We actually note the inflation and the stock market down here,")
+        print("So if you invest here, your money will increase a bit.")
+        print("1 - [Deposit gold]")
+        print("2 - [Withdraw gold]")
+        x = int(input("You: "))
+        if x == 1:
+            self.moneyPut = int(input("How much gold will you deposit? "))
+            if self.moneyPut < 0:
+                print("Are you trying to deposit negative money?")
+                print("Are you OK, this place tracks inflation by tracking if random dogs or stuff catch our money and stuff.")
+                print("This is the most serious branch of TrollCo, so get serious, too.")
+            elif self.moneyPut == 0:
+                print("Are you giving me no money and making me believe that you're seriously depositing?")
+                print("Are you OK, this place tracks inflation by tracking if random dogs or stuff catch our money and stuff.")
+                print("This is the most serious branch of TrollCo, so get serious, too.")
+            else:
+                print(f"Then I'll deposit {self.moneyPut} gold to the vault.")
+                self.money -= self.moneyPut
+                self.bankStorage += self.moneyPut
+        elif x == 2:
+            x = int(input("How much gold will you withdraw?"))
+            if x < 0:
+                print("Are you trying to withdraw negative money?")
+                print("Are you OK, this place tracks inflation by tracking if random dogs or things catch our money and stuff.")
+                print("This is the most serious branch of TrollCo, so get serious, too.")
+            elif x > self.bankStorage:
+                print("You can't withdraw more than you deposited!")
+                print("Are you OK, this place tracks inflation by tracking if random dogs or things catch our money and stuff.")
+                print("This is the most serious branch of TrollCo, so get serious, too.")
+            else:
+                print(f"Then I'll withdraw {x} gold from the vault.")
+                self.bankTimeNew = self.secsToday()
+                self.investRate = (self.bankTimeNew - self.bankTimeOld) / 1800 * 0.1
+                print(f"Your investment has increased by {self.investRate} so the gold amount you withdrew is {x + x * self.investRate}.")
+                self.bankStorage -= x
+                x += x * self.investRate
+                self.bankTimeOld = self.bankTimeNew
+                self.bankTimeNew = self.secsToday()
+                self.money += x
+    def wall(self):
+        print("This room is a covered up by a wall.")
+        print("You couldn't go there, so you returned to the room you came from.")
+        if self.whereYouCame == 1:
+            self.currentCoord += 1
+        elif self.whereYouCame == 2:
+            self.currentCoord -= 1
+        elif self.whereYouCame == 3:
+            self.currentCoord += 10
+        elif self.whereYouCame == 4:
+            self.currentCoord -= 10
     def renderEnemy(self, hp, damage1, damage2, defence, name, coords):
         if self.gridVisit[coords] == 1:
             print(f"This room once had a {name}.")
@@ -952,6 +1015,10 @@ class Dungeon:
                 self.trollInfo()
             elif self.locationType == "M":
                 self.trollMaker()
+            elif self.locationType == "B":
+                self.trollBank()
+            elif self.locationType == "0":
+                self.wall()
             elif self.locationType == "1":
                 self.renderEnemy(3, 1, 2, 0, "Dog", self.currentCoord)
             elif self.locationType == "2":
@@ -1023,6 +1090,7 @@ class Dungeon:
             print("4 - [Proceed down]")
             print("5 - [Stay]")
             x = int(input("You: "))
+            self.whereYouCame = x
             if x == 1:
                 if self.currentCoord - 1 < 0:
                     print("You can't go any farther in this direction.")
@@ -1069,7 +1137,7 @@ while True:
         knight.clear()
         knight.grid = []
         for i in range(100):
-            knight.grid.append(choice(["T", "C", "I", "M", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
+            knight.grid.append(choice(["T", "C", "I", "M", "B", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
         knight.grid[randint(1, 99)] = "+"
         knight.grid[randint(1, 99)] = "-"
         knight.grid[0] = "T"
@@ -1121,7 +1189,7 @@ while True:
             knight.clear()
             knight.grid = []
             for i in range(100):
-                knight.grid.append(choice(["T", "C", "I", "M", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
+                knight.grid.append(choice(["T", "C", "I", "M", "B", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
             knight.grid[randint(1, 99)] = "+"
             knight.grid[randint(1, 99)] = "-"
             knight.grid[0] = "T"
