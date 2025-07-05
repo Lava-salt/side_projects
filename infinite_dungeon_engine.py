@@ -1199,7 +1199,7 @@ while True:
         print("1 - [Enter Save Code]")
         print("2 - [Try Random Dungeon]")
         print("3 - [Generate Save Code]")
-        print("3 - [Quit]")
+        print("4 - [Quit]")
         x = int(input("You: "))
         if x == 1:
             knight.clear()
@@ -1240,6 +1240,8 @@ while True:
             quit()
         elif x == 4:
             quit()
+    elif x == 4:
+        quit()
     elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
