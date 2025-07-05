@@ -1186,7 +1186,6 @@ while True:
             for j in range(10):
                 print(end = custom[i * 10 + j])
             print()
-        print("This is a sample dungeon in a 10x10 grid.")
         print("You can add rooms as letters:")
         knight.roomTypes()
         print("Make a dungeon by putting letters in a 10x10 grid,")
@@ -1240,8 +1239,6 @@ while True:
             quit()
         elif x == 4:
             quit()
-    elif x == 4:
-        quit()
     elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
