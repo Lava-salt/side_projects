@@ -45,6 +45,10 @@ class Dungeon:
         self.corpus = words.words()
         self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         self.hints = ['In troll markets, you can buy swords with gold.', 'In troll markets, you can buy armour with gold.', 'In troll markets, you can buy bows with gold.', 'In troll markets, you can buy arrows with gold.', 'In troll markets, you can buy food with gold.', 'In troll markets, you can sell your items with gold.', 'The troll in troll market has a company TrollCo, which has 3 branches.', 'TrollCo branch #1 is a cartography branch.', 'TrollCo branch #1 (cartography branch) lets you map all the places that have a specific room type.', "TrollCo branch #1 (cartography branch) lets you map a specific coordinate's room type.", 'TrollCo branch #2 is an information branch.', 'TrollCo branch #2 (information branch) lets you buy hints, like this one.', 'TrollCo branch #3 is a crafting branch.', 'TrollCo branch #3 (information branch) lets you craft useful items from useless junk.', 'TrollCo branch #4 is an economic branch.', 'TrollCo branch #4 (economic branch) lets you withdraw and deposit gold.', 'Some rooms are walls, so you can\'t pass through them.', 'You can sometimes find monsters on rooms.', 'You can fight monsters with swords, or bows and arrows.', 'Bows can shoot far away but can end; but swords only shoot close distances, so there\'s a chance that the monster will run away.', 'If you want to deal damage with a bow, you must have at least 1 arrow.', 'If you want to heal, eat food.', 'Armour can protect you from damage.', 'Armour have a durability, which is shown in the "defence" stat of them.', 'Monsters can damage you from a random select range.', 'Monsters can resist some damage, which is shown in their "defence" stat.', 'Dogs, zombies and skeletons are easy-tier monsters.', 'Knights, ogres and ghosts are medium-tier monsters.', 'Dragons and demons are hard-tier monsters.', 'Defeating a monster gives you random useless items, but you can get gold by selling them.', 'Defeating a monster gives you random useless items, but you can craft items from them in TrollCo Branch #3.', 'The dungeon has some treasure that include gold.', 'The dungeon has some treasure that include useful items like swords, armour, bows, arrows or food.', 'The dungeon has some treasure that include useless items, but you can get gold by selling them.', 'The dungeon has some treasure that\xa0are already taken by another person.', 'You can find rooms that are empty.', "There's a goblin, which has a random number guessing puzzle.", "There's a goblin, which has a puzzle where you say if a word is real or fake.", "There's a goblin, which has a puzzle where\xa0guess a word.", 'One room is on fire, you can burn!', 'One room has icicles that can fall on you!', 'One room has a booby trap - shooting cannons!', 'One room has trampolines which bump you.', "There's a room where you can open URL's.", "There's a room where you can open\xa0files.", "There's a room where you can\xa0run codes, and maybe cheat codes if you know this game's OOP architecture.", "There's a room to warp you in a random place.", "There's a room to warp you in\xa0specific places with gold.", 'To exit a dungeon, you must find the exit room and a key to open it.']
+        self.assets = ["T", "C", "I", "M", "B", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "w", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]
+        self.allAssets = ["T", "C", "I", "M", "B", "0", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "w", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!", "-", "+"]
+        self.allAssetsEmoji = ["🏪", "🗺️", "ℹ️", "🛠️", "🪙", "🧱", "🐕", "🧟", "🩻", "🧙", "🧌", "👻", "🐉", "👹", "💰", "🛄", "🧰", "🔢", "🔤", "📑", "🔥", "🧊", "🏹", "🦘", "⬜", "🌐", "📁", "🖥️", "🌀", "💸", "🗝️", "🚪"]
+        self.selectArmour = ""
     def clear(self):
         system("cls")
     def displayInventory(self):
@@ -63,7 +67,7 @@ class Dungeon:
     def visitGrid(self):
         self.gridVisit[self.currentCoord] = 1
         if self.mapGrid[self.currentCoord] == "⬜":
-            self.mapGrid[self.currentCoord] = "⬛"
+            self.mapGrid[self.currentCoord] = self.allAssetsEmoji[self.allAssets.index(self.grid[self.currentCoord])]
     def roomTypes(self):
         print("T - Troll Market - Place to buy and sell items")
         print("C - Troll Cartographer - Buy specific rooms' locations")
@@ -620,6 +624,7 @@ class Dungeon:
         print("You can deposit and withdraw gold here.")
         print("We actually note the inflation and the stock market down here,")
         print("So if you invest here, your money will increase a bit.")
+        print(f"You have {self.money} gold.")
         print("1 - [Deposit gold]")
         print("2 - [Withdraw gold]")
         x = int(input("You: "))
@@ -631,6 +636,10 @@ class Dungeon:
                 print("This is the most serious branch of TrollCo, so get serious, too.")
             elif self.moneyPut == 0:
                 print("Are you giving me no money and making me believe that you're seriously depositing?")
+                print("Are you OK, this place tracks inflation by tracking if random dogs or stuff catch our money and stuff.")
+                print("This is the most serious branch of TrollCo, so get serious, too.")
+            elif self.moneyPut > self.money:
+                print("Are you trying to deposit more money than what you have?")
                 print("Are you OK, this place tracks inflation by tracking if random dogs or stuff catch our money and stuff.")
                 print("This is the most serious branch of TrollCo, so get serious, too.")
             else:
@@ -670,11 +679,11 @@ class Dungeon:
             self.currentCoord -= 10
     def renderEnemy(self, hp, damage1, damage2, defence, name, coords):
         if self.gridVisit[coords] == 1:
-            print(f"This room once had a {name}.")
+            print(f"This room once had one {name}.")
             print("But you defeated it.")
         else:
             print("You encountered a monster!")
-            print(f"It's a {name}!")
+            print(f"It's an underground {name}!")
             while True:
                 print(f"{name}:")
                 print(f"    Health: {hp}")
@@ -709,18 +718,18 @@ class Dungeon:
                             print(f"The {name} ran away, and your sword couldn't reach it.")
                     elif x == 2:
                         self.displayInventory()
-                        true = False
+                        self.bowPresent = False
                         for i in self.inventory:
                             if i in self.bows:
-                                true = True
+                                self.bowPresent = True
                         if not true:
                             print("You don't have any bows.")
                             break
-                        true = False
+                        self.arrowPresent = False
                         for i in self.inventory:
                             if i in self.arrows:
-                                true = True
-                        if not true:
+                                self.arrowPresent = True
+                        if not self.arrowPresent:
                             print("You don't have any arrows.")
                             break
                         while True:
@@ -768,20 +777,18 @@ class Dungeon:
                         self.damage = randint(damage1, damage2)
                         print(f"It attacked {self.damage} HP.")
                         self.hp -= self.damage
-                        true = False
+                        self.armourPresent = False
                         for i in self.inventory:
                             if i in self.armour:
-                                true = True
-                                if not true:
-                                    self.selectArmour = i
-                        if true:
+                                self.armourPresent = True
+                                self.selectArmour = i
+                        if self.armourPresent:
                             print(f"Your {self.selectArmour} protected you.")
                             if randint(1, self.armour.index(self.selectArmour) + 1) == 1:
                                 print(f"Your {self.selectArmour} broke!")
                                 del self.inventory[self.inventory.index(self.selectArmour)]
                 if self.hp < 0:
-                    self.clear()
-                    print("You died.")
+                    print(f"You were beaten up by the wild {name}.")
                     quit()
                 print(f"{name}:")
                 print(f"    Health: {hp}")
@@ -793,20 +800,18 @@ class Dungeon:
                 self.damage = randint(damage1, damage2)
                 print(f"The {name} attacked {self.damage} HP.")
                 self.hp -= self.damage
-                true = False
+                self.armourPresent = False
                 for i in self.inventory:
                     if i in self.armour:
-                        true = True
-                        if not true:
-                            self.selectArmour = i
-                if true:
+                        self.armourPresent = True
+                        self.selectArmour = i
+                if self.armourPresent:
                     print(f"Your {self.selectArmour} protected you.")
                     if randint(1, self.armour.index(self.selectArmour) + 1) == 1:
                         print(f"Your {self.selectArmour} broke!")
                         del self.inventory[self.inventory.index(self.selectArmour)]
                 if self.hp < 0:
-                    self.clear()
-                    print("You died.")
+                    print(f"You were chased (and lost) by the {name.lower()}.")
                     quit()
     def moneyTreasure(self, coords):
         if self.gridVisit[coords] == 1:
@@ -907,8 +912,7 @@ class Dungeon:
             self.hp -= 5
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
-                self.clear()
-                print("You died.")
+                print("You were set ablaze by the fire.")
                 quit()
         else:
             print("You survived the fire.")
@@ -919,8 +923,7 @@ class Dungeon:
             self.hp -= 1
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
-                self.clear()
-                print("You died.")
+                print("You turned into frost particles by an icicle.")
                 quit()
         else:
             print("You survived the icicles.")
@@ -931,20 +934,19 @@ class Dungeon:
             self.hp -= 2
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
-                self.clear()
-                print("You died.")
+                print("You were blasted into oblivion by a cannon.")
                 quit()
         else:
             print("You survived the cannons.")
     def bumpRoom(self):
-        print("This room consist trampolines.")
+        print("This room consists trampolines.")
         while True:
             if randint(1, 2) == 1:
                 print("You couldn't pass because of the trampolines.")
                 continue
             else:
                 print("You exited the room.")
-                pass
+                break
     def emptyRoom(self):
         print("This room is empty.")
     def eRoom(self):
@@ -1129,15 +1131,16 @@ while True:
     knight.clear()
     print("Welcome to the Infinite Dungeon Engine!")
     print("1 - [Play Randomly Generated Dungeon]")
-    print("2 - [Play Enter Dungeon Save Code]")
-    print("3 - [Make Your Own Dungeon]")
-    print("4 - [Community]")
+    print("2 - [Enter Dungeon Save Code]")
+    print("3 - [Generate Save Code]")
+    print("4 - [Make Your Own Dungeon]")
+    print("5 - [Community]")
     x = int(input("You: "))
     if x == 1:
         knight.clear()
         knight.grid = []
         for i in range(100):
-            knight.grid.append(choice(["T", "C", "I", "M", "B", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
+            knight.grid.append(choice(knight.assets))
         knight.grid[randint(1, 99)] = "+"
         knight.grid[randint(1, 99)] = "-"
         knight.grid[0] = "T"
@@ -1154,6 +1157,22 @@ while True:
         knight.grid = list(input("Dungeon save code: ").strip())
         knight.startDungeon(knight.grid)
     elif x == 3:
+        knight.clear()
+        knight.grid = []
+        for i in range(100):
+            knight.grid.append(choice(knight.assets))
+        knight.grid[randint(1, 99)] = "+"
+        knight.grid[randint(1, 99)] = "-"
+        knight.grid[0] = "T"
+        while not "+" in knight.grid or not "-" in knight.grid or not knight.grid[0] == "T":
+            knight.grid[randint(1, 99)] = "+"
+            knight.grid[randint(1, 99)] = "-"
+            knight.grid[0] = "T"
+        print("Here is your randomly generated save code:")
+        for i in knight.grid:
+            print(end = i)
+        quit()
+    elif x == 4:
         print("Welcome to the dungeon maker!")
         print("You can make your own dungeon here.")
         print("To make a dungeon, you need to put letters in a 10x10 grid.")
@@ -1179,6 +1198,7 @@ while True:
         print("Maybe, try a random dungeon...")
         print("1 - [Enter Save Code]")
         print("2 - [Try Random Dungeon]")
+        print("3 - [Generate Save Code]")
         print("3 - [Quit]")
         x = int(input("You: "))
         if x == 1:
@@ -1189,7 +1209,7 @@ while True:
             knight.clear()
             knight.grid = []
             for i in range(100):
-                knight.grid.append(choice(["T", "C", "I", "M", "B", "1", "2", "3", "4", "5", "6", "7", "8", "m", "s", "o", "N", "W", "f", "i", "c", "b", "X", "€", "f", ">", "?", "!"]))
+                knight.grid.append(choice(knight.assets))
             knight.grid[randint(1, 99)] = "+"
             knight.grid[randint(1, 99)] = "-"
             knight.grid[0] = "T"
@@ -1203,8 +1223,24 @@ while True:
             knight.money = 100
             knight.startDungeon(knight.grid)
         elif x == 3:
+            knight.clear()
+            knight.grid = []
+            for i in range(100):
+                knight.grid.append(choice(knight.assets))
+            knight.grid[randint(1, 99)] = "+"
+            knight.grid[randint(1, 99)] = "-"
+            knight.grid[0] = "T"
+            while not "+" in knight.grid or not "-" in knight.grid or not knight.grid[0] == "T":
+                knight.grid[randint(1, 99)] = "+"
+                knight.grid[randint(1, 99)] = "-"
+                knight.grid[0] = "T"
+            print("Here is your randomly generated save code:")
+            for i in knight.grid:
+                print(end = i)
             quit()
-    elif x == 4:
+        elif x == 4:
+            quit()
+    elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
         quit()
