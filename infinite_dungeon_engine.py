@@ -1,4 +1,13 @@
 from os import system
+system("cls")
+print("You need to run the compatability test first.)
+print("Is there a symbol like this: \"퟿\"")
+x = input("On top of the output screen? (y/n) ")
+if x.lower() = "y":
+    print("Then, your Python IDE is not compatible.")
+    print("Try Visual Studio Code.")
+else:
+    print("Then, your Python IDE is compatible.")
 from random import randint, choice
 from webbrowser import open
 from subprocess import call
