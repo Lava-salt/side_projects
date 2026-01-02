@@ -41,17 +41,19 @@ while True:
             if x == 1:
                 exec(f"d_set{d_set}_field{d_field}n = input('Its new name: ')")
             elif x == 2:
-                for i in range(0, 10):
-                    for i in eval(f"d_set{d_set}_field{d_field}list[{i} : {i + 10}]"):
-                        print(end = i)
-                    print()
-                print("Please enter \"exit\" to the field location part to exit field management.")
-                d_change = input("Change which location of the field? (number 1-100) ")
-                if d_change == "exit": break
-                else: d_change = int(d_change)
-                d_change -= 1
-                print("Recommended emojis: \"⌚⌛⏰⏳⏩⏪⏫⏬◽◾☔☕♈♉♊♋♌♍♎♏♐♑♒♓♿⚓⚽⚾⛄⛅⛎⛔⛪⛲⛳⛴⛵⛺⛽✅✊✋✨❌❎❓❔❕❗➕➖➗➰➿⬛⬜⭐⭕⛔⭐✅⏩♏⌚⬛⬜\"")
-                exec(f"d_set{d_set}_field{d_field}list[d_change] = input('New content as ASCII character: ')")
+                d_change = ":)"
+                while d_change != "exit":
+                    for i in range(0, 10):
+                        for i in eval(f"d_set{d_set}_field{d_field}list[{i} : {i + 10}]"):
+                            print(end = i)
+                        print()
+                    print("Please enter \"exit\" to the field location part to exit field management.")
+                    d_change = input("Change which location of the field? (number 1-100) ")
+                    if d_change == "exit": break
+                    else: d_change = int(d_change)
+                    d_change -= 1
+                    print("Recommended emojis: \"⌚⌛⏰⏳⏩⏪⏫⏬◽◾☔☕♈♉♊♋♌♍♎♏♐♑♒♓♿⚓⚽⚾⛄⛅⛎⛔⛪⛲⛳⛴⛵⛺⛽✅✊✋✨❌❎❓❔❕❗➕➖➗➰➿⬛⬜⭐⭕⛔⭐✅⏩♏⌚⬛⬜\"")
+                    exec(f"d_set{d_set}_field{d_field}list[d_change] = input('New content as ASCII character: ')")
         elif x == 3:
             print("Please put the code between /* and */ to a file and run it using this program's file running feature*:\n*Use Python to run, not SubProcess or cmd.exe.\n/*")
             for i in range(1, 6):
