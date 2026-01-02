@@ -194,7 +194,7 @@ Vocabulary:
 		[OF_NOUN_PLUR]""")
             elif f"[WORD:{x.upper()}]" in word:
                 i = word.index(f"[WORD:{x.upper()}]")
-                while i != "":
+                while word[i] != "":
                     print(word[i])
                     i += 1
             else:
