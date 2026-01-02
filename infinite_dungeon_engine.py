@@ -1252,4 +1252,6 @@ while True:
     elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
+        print("By the way, if you like this game, try its simpler predecessor game, Sandbox!")
+        print("Download Sandbox from: https://github.com/Lava-salt/side_projects/blob/main/sandbox.py")
         quit()
