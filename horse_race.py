@@ -1,4 +1,5 @@
 # Horse race simulation, but after each race, their winning chances change.
+
 from random import randint
 from time import sleep
 from os import system
@@ -25,9 +26,6 @@ debug = 0
 while True:
     for i in range(10):
         print(f"Horse {i + 1}#: {horses[i]} - {chances[i]}% Win Chance")
-    print("\nGraph of win chances:")
-    print("Up/Down: Chance of Winning")
-    print("Left/Right: Horse No.")
     while True:
         for i in range(10):
             big = 100
