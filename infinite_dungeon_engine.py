@@ -1162,10 +1162,12 @@ while True:
         print("Just in case, get 100 gold.")
         knight.money = 100
         knight.startDungeon(knight.grid)
+        input()
     elif x == 2:
         knight.clear()
         knight.grid = list(input("Dungeon save code: ").strip())
         knight.startDungeon(knight.grid)
+        input()
     elif x == 3:
         knight.clear()
         knight.grid = []
@@ -1181,7 +1183,7 @@ while True:
         print("Here is your randomly generated save code:")
         for i in knight.grid:
             print(end = i)
-        quit()
+        input()
     elif x == 4:
         print("Welcome to the dungeon maker!")
         print("You can make your own dungeon here.")
@@ -1249,6 +1251,7 @@ while True:
             quit()
         elif x == 4:
             quit()
+        input()
     elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
         print("Go to \"https://github.com/Lava-salt/side_projects/discussions/2\"")
