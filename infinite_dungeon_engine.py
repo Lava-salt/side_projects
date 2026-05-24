@@ -5,8 +5,8 @@ print("Is there a symbol like this: \"퟿\"")
 x = input("On top of the output screen? (y/n) ")
 if x.lower() == "y":
     print("Then, your Python IDE is not compatible.")
-    print("Try Visual Studio Code.")
-    quit()
+    print("Try Visual Studio Code or Python 3.14.")
+    input()
 else:
     print("Then, your Python IDE is compatible.")
 from random import randint, choice
@@ -799,7 +799,7 @@ class Dungeon:
                                 del self.inventory[self.inventory.index(self.selectArmour)]
                 if self.hp < 0:
                     print(f"You were beaten up by the wild {name}.")
-                    quit()
+                    input()
                 print(f"{name}:")
                 print(f"    Health: {hp}")
                 print(f"    Damage: {damage1} to {damage2} HP")
@@ -822,7 +822,7 @@ class Dungeon:
                         del self.inventory[self.inventory.index(self.selectArmour)]
                 if self.hp < 0:
                     print(f"You were chased (and lost) by the {name.lower()}.")
-                    quit()
+                    input()
     def moneyTreasure(self, coords):
         if self.gridVisit[coords] == 1:
             print("This room once had a treasure.")
@@ -923,7 +923,7 @@ class Dungeon:
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
                 print("You were set ablaze by the fire.")
-                quit()
+                input()
         else:
             print("You survived the fire.")
     def iceRoom(self):
@@ -934,7 +934,7 @@ class Dungeon:
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
                 print("You turned into frost particles by an icicle.")
-                quit()
+                input()
         else:
             print("You survived the icicles.")
     def cannonRoom(self):
@@ -945,7 +945,7 @@ class Dungeon:
             print(f"You have {self.hp} HP left.")
             if self.hp < 0:
                 print("You were blasted into oblivion by a cannon.")
-                quit()
+                input()
         else:
             print("You survived the cannons.")
     def bumpRoom(self):
@@ -1087,7 +1087,7 @@ class Dungeon:
                 print(self.locationType)
                 print("Save code invalid.")
                 print(self.grid)
-                quit()
+                input()
             self.visitGrid()
             for i in range(10):
                 for j in range(10):
@@ -1135,7 +1135,7 @@ class Dungeon:
         print("Dungeon save code:")
         for i in self.grid:
             print(i, end = "")
-        quit()
+        input()
 while True:
     knight = Dungeon()
     knight.clear()
@@ -1248,9 +1248,9 @@ while True:
             print("Here is your randomly generated save code:")
             for i in knight.grid:
                 print(end = i)
-            quit()
+            input()
         elif x == 4:
-            quit()
+            input()
         input()
     elif x == 5:
         print("To message or request new room types to I.D.E.'s maker @Lava-Salt (GitHub) or post comments to I.D.E. community forum,")
